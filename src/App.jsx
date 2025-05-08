@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import React from 'react';
 
-// Configuración MathJax (igual que antes)
-
 const App = () => {
   const logicaProposicional = Array.from({ length: 15 }, (_, i) => i + 1);
   const induccionMatematica = Array.from({ length: 15 }, (_, i) => i + 1);
