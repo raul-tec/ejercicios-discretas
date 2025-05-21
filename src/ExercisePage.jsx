@@ -15,7 +15,7 @@ export default function ExercisePage({ markdown }) {
     return <div>Ejercicio {exerciseNumber} no encontrado.</div>;
   }
 
-  console.log(currentExercise);
+  //console.log(currentExercise);
 
   return (
     <div>

@@ -11,4 +11,10 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  test: {
+    globals: true, // Para no tener que importar describe, it, expect, etc.
+    environment: 'jsdom', // Simula el DOM
+    setupFiles: './src/setupTests.js', // (Opcional) Archivo de configuración global para pruebas
+    css: false, // O true si necesitas procesar CSS, o un objeto de configuración
+  },
 });
