@@ -13,6 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as CuestionariosPruebaImport } from './routes/cuestionarios/prueba'
+import { Route as CuestionariosLogicaImport } from './routes/cuestionarios/logica'
+import { Route as CuestionariosInduccionMatematicaImport } from './routes/cuestionarios/induccion-matematica'
 import { Route as EjerciciosLogicaProposicionalIdImport } from './routes/ejercicios/logica-proposicional/$id'
 import { Route as EjerciciosInduccionMatematicaIdImport } from './routes/ejercicios/induccion-matematica/$id'
 
@@ -29,6 +31,19 @@ const CuestionariosPruebaRoute = CuestionariosPruebaImport.update({
   path: '/cuestionarios/prueba',
   getParentRoute: () => rootRoute,
 } as any)
+
+const CuestionariosLogicaRoute = CuestionariosLogicaImport.update({
+  id: '/cuestionarios/logica',
+  path: '/cuestionarios/logica',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CuestionariosInduccionMatematicaRoute =
+  CuestionariosInduccionMatematicaImport.update({
+    id: '/cuestionarios/induccion-matematica',
+    path: '/cuestionarios/induccion-matematica',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 const EjerciciosLogicaProposicionalIdRoute =
   EjerciciosLogicaProposicionalIdImport.update({
@@ -53,6 +68,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/cuestionarios/induccion-matematica': {
+      id: '/cuestionarios/induccion-matematica'
+      path: '/cuestionarios/induccion-matematica'
+      fullPath: '/cuestionarios/induccion-matematica'
+      preLoaderRoute: typeof CuestionariosInduccionMatematicaImport
+      parentRoute: typeof rootRoute
+    }
+    '/cuestionarios/logica': {
+      id: '/cuestionarios/logica'
+      path: '/cuestionarios/logica'
+      fullPath: '/cuestionarios/logica'
+      preLoaderRoute: typeof CuestionariosLogicaImport
       parentRoute: typeof rootRoute
     }
     '/cuestionarios/prueba': {
@@ -83,6 +112,8 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
+  '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
   '/ejercicios/induccion-matematica/$id': typeof EjerciciosInduccionMatematicaIdRoute
   '/ejercicios/logica-proposicional/$id': typeof EjerciciosLogicaProposicionalIdRoute
@@ -90,6 +121,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
+  '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
   '/ejercicios/induccion-matematica/$id': typeof EjerciciosInduccionMatematicaIdRoute
   '/ejercicios/logica-proposicional/$id': typeof EjerciciosLogicaProposicionalIdRoute
@@ -98,6 +131,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
+  '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
   '/ejercicios/induccion-matematica/$id': typeof EjerciciosInduccionMatematicaIdRoute
   '/ejercicios/logica-proposicional/$id': typeof EjerciciosLogicaProposicionalIdRoute
@@ -107,18 +142,24 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cuestionarios/induccion-matematica'
+    | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
     | '/ejercicios/induccion-matematica/$id'
     | '/ejercicios/logica-proposicional/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cuestionarios/induccion-matematica'
+    | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
     | '/ejercicios/induccion-matematica/$id'
     | '/ejercicios/logica-proposicional/$id'
   id:
     | '__root__'
     | '/'
+    | '/cuestionarios/induccion-matematica'
+    | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
     | '/ejercicios/induccion-matematica/$id'
     | '/ejercicios/logica-proposicional/$id'
@@ -127,6 +168,8 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CuestionariosInduccionMatematicaRoute: typeof CuestionariosInduccionMatematicaRoute
+  CuestionariosLogicaRoute: typeof CuestionariosLogicaRoute
   CuestionariosPruebaRoute: typeof CuestionariosPruebaRoute
   EjerciciosInduccionMatematicaIdRoute: typeof EjerciciosInduccionMatematicaIdRoute
   EjerciciosLogicaProposicionalIdRoute: typeof EjerciciosLogicaProposicionalIdRoute
@@ -134,6 +177,8 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CuestionariosInduccionMatematicaRoute: CuestionariosInduccionMatematicaRoute,
+  CuestionariosLogicaRoute: CuestionariosLogicaRoute,
   CuestionariosPruebaRoute: CuestionariosPruebaRoute,
   EjerciciosInduccionMatematicaIdRoute: EjerciciosInduccionMatematicaIdRoute,
   EjerciciosLogicaProposicionalIdRoute: EjerciciosLogicaProposicionalIdRoute,
@@ -150,6 +195,8 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
+        "/cuestionarios/induccion-matematica",
+        "/cuestionarios/logica",
         "/cuestionarios/prueba",
         "/ejercicios/induccion-matematica/$id",
         "/ejercicios/logica-proposicional/$id"
@@ -157,6 +204,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.jsx"
+    },
+    "/cuestionarios/induccion-matematica": {
+      "filePath": "cuestionarios/induccion-matematica.jsx"
+    },
+    "/cuestionarios/logica": {
+      "filePath": "cuestionarios/logica.jsx"
     },
     "/cuestionarios/prueba": {
       "filePath": "cuestionarios/prueba.jsx"

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import QuizComponent from "../../QuizComponent";
-import cuestionarioData from '../../datos_cuestionarios/prueba';
+import cuestionarioData from '../../datos_cuestionarios/logica';
 
 export const Route = createFileRoute('/cuestionarios/prueba')({
   component: Component,

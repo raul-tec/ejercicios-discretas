@@ -1,5 +1,5 @@
 const cuestionarioData = {
-  titulo: "Cuestionario de Lógica Proposicional e Inducción Matemática",
+  titulo: "Cuestionario de Lógica Proposicional",
   preguntas: [
     {
       id: 1,

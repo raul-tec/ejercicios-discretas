@@ -8,6 +8,6 @@ export const Route = createFileRoute('/ejercicios/logica-proposicional/$id')({
 
 function Component() {
   return <>
-    <Sidebar markdown={exercisesMd} />
+    <Sidebar data={exercisesMd} />
   </>
 }
