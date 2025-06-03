@@ -1,25 +1,24 @@
 import React from 'react';
 import { MathJax } from 'better-react-mathjax';
 
-// Componente para contenido inline con MathJax
 const InlineContentRenderer = ({ content }) => {
-
   if (!content || content.length === 0) return null;
 
   return (
-    <MathJax hideUntilTypeset="first" dynamic>
-      {content.map((segment, index) => {
-        if (segment.type === 'strong') {
-          return segment.value ? <strong key={index}>{segment.value}</strong> : <React.Fragment key={index} />;
-        } else {
-          return segment.value ? <React.Fragment key={index}>{segment.value}</React.Fragment> : <React.Fragment key={index} />;
-        }
-      })}
-    </MathJax>
+    <MathJax hideUntilTypeset="first" dynamic inline={true} key={JSON.stringify(content)}>
+      {
+        content.map((segment, index) => {
+          if (segment.type === 'strong') {
+            return segment.value ? <strong key={index}>{segment.value}</strong> : <React.Fragment key={index} />;
+          } else {
+            return segment.value ? <React.Fragment key={index}>{segment.value}</React.Fragment> : <React.Fragment key={index} />;
+          }
+        })
+      }
+    </MathJax >
   );
 };
 
-// Renderizado principal con estilos responsivos
 const MarkdownRenderer = ({ contentBlocks }) => {
   if (!contentBlocks || contentBlocks.length === 0) {
     return <p><i>Contenido no disponible.</i></p>;

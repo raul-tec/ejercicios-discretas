@@ -14,66 +14,36 @@ Verificar las equivalencias lógicas. Da una razón para cada paso.
 
 **Verificación de la primera equivalencia: $(p \land \neg q) \lor p \equiv p$**
 
-$$
-\begin{aligned}
-(p \land \neg q) \lor p &\equiv p \lor (p \land \neg q) && (\text{Ley Conmutativa para } \lor) \\
-                       &\equiv p && (\text{Ley de Absorción})
-\end{aligned}
-$$
+Comenzamos con la expresión del lado izquierdo, $(p \land \neg q) \lor p$. Nuestro objetivo es simplificarla hasta obtener $p$. Primero, podemos cambiar el orden de los términos unidos por el operador $\lor$ (disyunción u "OR") usando la Ley Conmutativa. Aplicando la Ley Conmutativa para $\lor$, obtenemos $p \lor (p \land \neg q)$. Ahora, esta expresión tiene la forma $a \lor (a \land b)$, donde $a$ es $p$ y $b$ es $\neg q$. Esta estructura corresponde a una de las Leyes de Absorción, específicamente $a \lor (a \land b) \equiv a$. Aplicando esta Ley de Absorción a nuestra expresión $p \lor (p \land \neg q)$, obtenemos simplemente $p$. Como hemos transformado el lado izquierdo en $p$, que es igual al lado derecho, hemos verificado la equivalencia.
 
-Por lo tanto, es equivalente
+Por lo tanto, hemos demostrado que $(p \land \neg q) \lor p \equiv p$, es decir, sí es equivalente.
 
 **Verificación de la segunda equivalencia: $p \land (\neg q \lor p) \equiv p$**
 
-$$
-\begin{aligned}
-p \land (\neg q \lor p) &\equiv p \land (p \lor \neg q) && (\text{Ley Conmutativa para } \lor) \\
-                       &\equiv p && (\text{Ley de Absorción})
-\end{aligned}
-$$
+Nuevamente, empezamos con el lado izquierdo de la equivalencia, que es $p \land (\neg q \lor p)$. Queremos transformarlo en $p$. Observemos la expresión dentro del paréntesis, $(\neg q \lor p)$. Podemos usar la Ley Conmutativa para $\lor$ para reordenar los términos dentro del paréntesis, lo que nos da $p \land (p \lor \neg q)$. Ahora, la expresión tiene la forma $a \land (a \lor b)$, donde $a$ es $p$ y $b$ es $\neg q$. Esta es la otra forma de la Ley de Absorción, $a \land (a \lor b) \equiv a$. Aplicando esta ley a nuestra expresión $p \land (p \lor \neg q)$, la simplificamos directamente a $p$. Hemos llegado al lado derecho de la equivalencia.
 
-Por lo tanto, es equivalente
+$$ p \land (\neg q \lor p) \equiv p \land (p \lor \neg q) \quad (\text{Ley Conmutativa para } \lor) $$
+$$ \equiv p \quad (\text{Ley de Absorción}) $$
+
+Así, hemos verificado que $p \land (\neg q \lor p) \equiv p$, es decir, sí es equivalente.
 
 **Verificación de la tercera equivalencia: $\neg (p \lor \neg q) \lor (\neg p \land \neg q) \equiv \neg p$**
 
-$$
-\begin{aligned}
-\neg (p \lor \neg q) \lor (\neg p \land \neg q) &\equiv (\neg p \land \neg (\neg q)) \lor (\neg p \land \neg q) && (\text{Ley de De Morgan}) \\
-&\equiv (\neg p \land q) \lor (\neg p \land \neg q) && (\text{Ley de la Doble Negación}) \\
-&\equiv \neg p \land (q \lor \neg q) && (\text{Ley Distributiva}) \\
-&\equiv \neg p \land T && (\text{Ley de Negación}) \\
-&\equiv \neg p && (\text{Ley de Identidad para } \land)
-\end{aligned}
-$$
+Consideremos la expresión del lado izquierdo: $\neg (p \lor \neg q) \lor (\neg p \land \neg q)$. Nuestro objetivo es simplificarla a $\neg p$. Primero, podemos aplicar una de las Leyes de De Morgan a la primera parte de la expresión, $\neg (p \lor \neg q)$. Esta ley nos dice que $\neg (a \lor b) \equiv \neg a \land \neg b$. Aplicándola, obtenemos $(\neg p \land \neg (\neg q)) \lor (\neg p \land \neg q)$. Dentro del primer paréntesis, tenemos $\neg (\neg q)$. La Ley de la Doble Negación nos dice que $\neg (\neg a) \equiv a$. Aplicando esto, la expresión se convierte en $(\neg p \land q) \lor (\neg p \land \neg q)$. Ahora vemos que $\neg p$ está presente en ambos términos unidos por $\lor$. Podemos "factorizar" $\neg p$ usando la Ley Distributiva (específicamente, la distribución de $\land$ sobre $\lor$). Esto nos da $\neg p \land (q \lor \neg q)$. Ahora, miremos la expresión dentro del paréntesis, $q \lor \neg q$. Por la Ley de Negación, una proposición o su negación siempre es verdadera (T). Así que $q \lor \neg q \equiv T$. Sustituyendo esto, obtenemos $\neg p \land T$. Finalmente, aplicamos la Ley de Identidad para $\land$, que dice que $a \land T \equiv a$. En nuestro caso, esto significa que $\neg p \land T$ se simplifica a $\neg p$.
 
-Por lo tanto, es equivalente
+Por lo tanto, la equivalencia $\neg (p \lor \neg q) \lor (\neg p \land \neg q) \equiv \neg p$ es verdadera.
 
 **Verificación de la cuarta equivalencia: $\neg ((\neg p \land q) \lor (\neg p \land \neg q)) \lor (p \land q) \equiv p$**
 
-$$
-\begin{aligned}
-\neg ((\neg p \land q) \lor (\neg p \land \neg q)) \lor (p \land q) &\equiv \neg (\neg p \land (q \lor \neg q)) \lor (p \land q) && (\text{Ley Distributiva}) \\
-&\equiv \neg (\neg p \land T) \lor (p \land q) && (\text{Ley de Negación}) \\
-&\equiv \neg (\neg p) \lor (p \land q) && (\text{Ley de Identidad para } \land) \\
-&\equiv p \lor (p \land q) && (\text{Ley de la Doble Negación}) \\
-&\equiv p && (\text{Ley de Absorción})
-\end{aligned}
-$$
+Comenzamos con la expresión del lado izquierdo: $\neg ((\neg p \land q) \lor (\neg p \land \neg q)) \lor (p \land q)$. Nuestro objetivo es simplificarla hasta obtener $p$. Primero, enfoquémonos en la expresión dentro de la negación principal: $(\neg p \land q) \lor (\neg p \land \neg q)$. Notamos que $\neg p$ es un factor común en ambos términos. Podemos aplicar la Ley Distributiva para factorizar $\neg p$, obteniendo $\neg p \land (q \lor \neg q)$. Ahora sustituimos esto de nuevo en la expresión completa: $\neg (\neg p \land (q \lor \neg q)) \lor (p \land q)$. Dentro del paréntesis, $q \lor \neg q$ se simplifica a $T$ por la Ley de Negación: $\neg (\neg p \land T) \lor (p \land q)$. Luego, $\neg p \land T$ se simplifica a $\neg p$ por la Ley de Identidad para $\land$: $\neg (\neg p) \lor (p \land q)$. Ahora aplicamos la Ley de la Doble Negación a $\neg (\neg p)$, que se convierte en $p$: $p \lor (p \land q)$. Finalmente, reconocemos esta expresión como una instancia de la Ley de Absorción, $a \lor (a \land b) \equiv a$. Con $a=p$ y $b=q$, la expresión $p \lor (p \land q)$ se simplifica a $p$.
 
-Por lo tanto, es equivalente
+Así, hemos verificado que $\neg ((\neg p \land q) \lor (\neg p \land \neg q)) \lor (p \land q) \equiv p$.
 
 **Verificación de la quinta equivalencia: $(p \land (\neg p \lor q)) \lor (p \land q) \equiv p$**
 
-$$
-\begin{aligned}
-(p \land (\neg p \lor q)) \lor (p \land q) &\equiv ((p \land \neg p) \lor (p \land q)) \lor (p \land q) && (\text{Ley Distributiva}) \\
-&\equiv (F \lor (p \land q)) \lor (p \land q) && (\text{Ley de Negación}) \\
-&\equiv (p \land q) \lor (p \land q) && (\text{Ley de Identidad para } \lor) \\
-&\equiv p \land q && (\text{Ley Idempotente para } \lor)
-\end{aligned}
-$$
+Empezamos con el lado izquierdo: $(p \land (\neg p \lor q)) \lor (p \land q)$. Intentaremos simplificarla. Primero, aplicamos la Ley Distributiva al primer término $p \land (\neg p \lor q)$. Distribuimos $p$ sobre $(\neg p \lor q)$, lo que nos da $(p \land \neg p) \lor (p \land q)$. Sustituyendo esto en la expresión completa, tenemos $((p \land \neg p) \lor (p \land q)) \lor (p \land q)$. Ahora, simplificamos el término $p \land \neg p$. Según la Ley de Negación, una proposición y su negación es siempre falsa (F). Así que $p \land \neg p \equiv F$. La expresión se convierte en $(F \lor (p \land q)) \lor (p \land q)$. Usando la Ley de Identidad para $\lor$, sabemos que $F \lor a \equiv a$. Por lo tanto, $F \lor (p \land q)$ se simplifica a $(p \land q)$. La expresión ahora es $(p \land q) \lor (p \land q)$. Finalmente, aplicamos la Ley Idempotente para $\lor$, que dice que $a \lor a \equiv a$. En nuestro caso, $(p \land q) \lor (p \land q)$ se simplifica a $p \land q$.
 
-La expresión $(p \land (\neg p \lor q)) \lor (p \land q)$ se simplifica a $p \land q$, no a $p$. Por lo tanto, la equivalencia propuesta originalmente es falsa.
+Hemos simplificado el lado izquierdo a $p \land q$. Sin embargo, el lado derecho de la equivalencia dada en el problema es $p$. Como $p \land q$ no es lógicamente equivalente a $p$ en general (por ejemplo, si $p$ es verdadero y $q$ es falso, $p \land q$ es falso mientras que $p$ es verdadero), la equivalencia original $(p \land (\neg p \lor q)) \lor (p \land q) \equiv p$ **no es correcta**. La simplificación correcta del lado izquierdo es $p \land q$.
 
 ## Ejercicio 2
 

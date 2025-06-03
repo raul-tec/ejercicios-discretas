@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin 'tailwind-scrollbar';
+
 @layer base {
   h1 {
     @apply text-4xl md:text-5xl font-bold leading-tight;

@@ -1,9 +1,9 @@
-import parseExercisesMarkdown from './util/parseExercisesMarkdown';
+import parseExercisesMarkdown from '../util/parseExercisesMarkdown';
 import MarkdownRenderer from './MarkdownRenderer';
 import { useMemo } from "react";
 import { useParams } from '@tanstack/react-router';
 
-export default function ExercisePage({ markdown }) {
+export default function ExercisePage({ markdown, isLogic }) {
   const { id: exerciseNumber } = useParams({ strict: false });
 
   const allExercises = useMemo(() => parseExercisesMarkdown(markdown), [markdown]);
@@ -11,15 +11,11 @@ export default function ExercisePage({ markdown }) {
   const exerciseKey = `ejercicio${exerciseNumber}`;
   const currentExercise = allExercises[exerciseKey];
 
-  if (!currentExercise) {
-    return <div>Ejercicio {exerciseNumber} no encontrado.</div>;
-  }
-
-  //console.log(currentExercise);
-
   return (
     <div>
-      <h2>Ejercicio {exerciseNumber}</h2>
+      {isLogic ?
+        <h2>Ejercicio {exerciseNumber} - Lógica proposicional</h2> :
+        <h2>Ejercicio {exerciseNumber} - Inducción matemática</h2>}
 
       <h3>Planteamiento</h3>
       <MarkdownRenderer contentBlocks={currentExercise.planteamiento} />

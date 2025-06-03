@@ -8,19 +8,21 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
   const currentPath = location.pathname;
 
   const [isMobile, setIsMobile] = useState(false);
-  const [isOpen, setIsOpen] = useState(true); // Sidebar abierto por defecto en desktop
+  const [isOpen, setIsOpen] = useState(true);
   const [logicOpen, setLogicOpen] = useState(false);
   const [inductionOpen, setInductionOpen] = useState(false);
 
-  // Detecta tamaño de pantalla
+  const isLogicQuizActive = location.pathname === '/cuestionarios/logica'
+  const isInductionQuizActive = location.pathname === '/cuestionarios/induccion-matematica'
+
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768; // md breakpoint
+      const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       if (mobile) {
-        setIsOpen(false); // Cerrado por defecto en móvil
+        setIsOpen(false);
       } else {
-        setIsOpen(true); // Abierto por defecto en desktop
+        setIsOpen(true);
       }
     };
 
@@ -29,7 +31,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Abre la sección correspondiente a la ruta actual
   useEffect(() => {
     setLogicOpen(currentPath.startsWith("/ejercicios/logica-proposicional"));
     setInductionOpen(currentPath.startsWith("/ejercicios/induccion-matematica"));
@@ -43,7 +44,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
       const href = `${basePath}/${id}`;
       const isActive = currentPath === href;
       return (
-        // Idealmente, estos serían <Link> de TanStack Router también
         <Link
           key={id}
           to={href}
@@ -51,8 +51,8 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
             block px-4 py-2.5 rounded-md transition-colors duration-200
             text-sm
             ${isActive
-              ? "bg-emerald-500/80 dark:bg-emerald-600/80 text-white font-semibold shadow-md"
-              : "text-slate-700 dark:text-slate-300 hover:bg-emerald-500/10 dark:hover:bg-emerald-400/20 hover:text-emerald-700 dark:hover:text-emerald-300"
+              ? "bg-emerald-500 dark:bg-emerald-600/80 text-white font-semibold shadow-md"
+              : "text-slate-700 dark:text-slate-300 hover:bg-emerald-600/10 dark:hover:bg-emerald-400/20 hover:text-emerald-700 dark:hover:text-emerald-300"
             }
           `}
         >
@@ -62,7 +62,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
     });
   };
 
-  // Clases base para los items principales del Nav (Página Principal, Lógica, Inducción)
   const navItemClasses = `
     cursor-pointer w-full flex justify-between items-center px-4 py-3
     text-slate-800 dark:text-slate-100
@@ -72,9 +71,7 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
   `;
 
   return (
-    // Fondo general de la aplicación con gradiente
-    <div className="flex h-screen bg-gradient-to-br from-green-300 via-emerald-400 to-teal-500 dark:from-slate-900 dark:via-slate-800 dark:to-gray-900 overflow-hidden relative">
-      {/* Overlay para móviles cuando el sidebar está abierto */}
+    <div className="flex h-screen bg-gradient-to-br from-green-500/50 via-emerald-200 to-teal-200 dark:from-slate-900 dark:via-slate-800 dark:to-gray-900 overflow-hidden relative">
       {isMobile && isOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
@@ -83,7 +80,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
         />
       )}
 
-      {/* Sidebar con efecto glass */}
       <div
         className={`
           fixed md:static top-0 left-0 z-50 h-full
@@ -91,14 +87,14 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
           backdrop-blur-xl shadow-2xl
           border-r border-white/30 dark:border-slate-700/50
           transform transition-transform duration-300 ease-in-out
-          w-72  // Ancho del sidebar
+          w-72
           ${isMobile ? (isOpen ? "translate-x-0" : "-translate-x-full") : "translate-x-0"}
         `}
       >
         <div className="p-4 flex flex-col h-full">
-          <div className="flex items-center justify-between mb-6 min-h-[40px]"> {/* Espacio para el título o logo y botón de cerrar */}
+          <div className="flex items-center justify-between mb-6 min-h-[40px]">
             <Link to="/" className="text-xl font-semibold text-emerald-700 dark:text-emerald-300 hover:opacity-80">
-              Ejercicios explicados {/* Logo */}
+              Ejercicios explicados
             </Link>
             {isMobile && (
               <button
@@ -106,7 +102,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
                 className="p-2 rounded-md text-slate-600 dark:text-slate-400 hover:bg-emerald-500/20 dark:hover:bg-emerald-400/30 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 aria-label="Cerrar menú"
               >
-                {/* Icono de "X" para cerrar */}
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -114,12 +109,11 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
             )}
           </div>
 
-          <nav className="flex-1 space-y-2 overflow-y-auto pr-1"> {/* pr-1 para espacio scrollbar */}
+          <nav className="flex-1 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-500/50 scrollbar-track-transparent hover:scrollbar-thumb-emerald-600/70 scrollbar-thumb-rounded-full">
             <Link to="/" className={navItemClasses}>
               Página principal
             </Link>
 
-            {/* Lógica Proposicional */}
             <div>
               <button
                 onClick={() => setLogicOpen(prev => !prev)}
@@ -143,7 +137,6 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
               )}
             </div>
 
-            {/* Inducción Matemática */}
             <div>
               <button
                 onClick={() => setInductionOpen(prev => !prev)}
@@ -167,21 +160,27 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
               )}
             </div>
 
-            {/*  */}
-            <Link to="/cuestionarios/logica" className={navItemClasses}>
+            <Link to="/cuestionarios/logica" className={
+              isLogicQuizActive
+                ? `${navItemClasses} font-bold bg-emerald-500/80 text-white`
+                : `${navItemClasses}`
+            }
+            >
               Cuestionario de lógica
             </Link>
 
-            <Link to="/cuestionarios/induccion-matematica" className={navItemClasses}>
+            <Link to="/cuestionarios/induccion-matematica" className={
+              isInductionQuizActive
+                ? `${navItemClasses} font-bold bg-emerald-500/80 text-white`
+                : `${navItemClasses}`
+            }>
               Cuestionario de inducción matemática
             </Link>
           </nav>
         </div>
       </div>
 
-      {/* Contenido principal */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header para móvil con botón de abrir menú */}
         {isMobile && (
           <header className="bg-white/20 dark:bg-slate-800/30 backdrop-blur-md p-3 shadow-sm flex items-center sticky top-0 z-30">
             <button
@@ -199,14 +198,13 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
           </header>
         )}
 
-        {/* Contenedor del ejercicio con efecto glass */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          <div className="bg-white/90 dark:bg-slate-800/60 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/20 dark:border-slate-700/30 min-h-full">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-600/40 scrollbar-track-transparent hover:scrollbar-thumb-emerald-600/50 scrollbar-thumb-rounded-full">
+          <div className="bg-white/95 dark:bg-slate-800/60 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/20 dark:border-slate-700/30 min-h-full">
             {isQuestionnaire ?
-              <QuizComponent cuestionario={data} /> : <ExercisePage markdown={data} />}
+              <QuizComponent cuestionario={data} /> : <ExercisePage markdown={data} isLogic={logicOpen} />}
           </div>
         </main>
       </div>
-    </div>
+    </div >
   );
 }

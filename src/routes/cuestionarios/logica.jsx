@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import cuestionarioData from '../../datos_cuestionarios/logica';
-import Sidebar from '../../Sidebar';
+import Sidebar from '../../components/Sidebar'
 
 export const Route = createFileRoute('/cuestionarios/logica')({
     component: RouteComponent,

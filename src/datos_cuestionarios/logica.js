@@ -3,260 +3,318 @@ const cuestionarioData = {
   preguntas: [
     {
       id: 1,
-      enunciado: "¿Cuál es la negación de la proposición $p \\rightarrow q$?",
+      enunciado:
+        'Considera la afirmación: "Esta oración es falsa". ¿Es una proposición lógica válida?',
       respuestas: [
         {
-          texto: "$\\neg p \\rightarrow \\neg q$",
+          texto: "Sí, y es verdadera.",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. La negación de $p \\rightarrow q$ no es $\\neg p \\rightarrow \\neg q$. Recuerda que $p \\rightarrow q$ es equivalente a $\\neg p \\vee q$, por lo que su negación es $p \\wedge \\neg q$.",
+            "Incorrecto. Si fuera verdadera, entonces lo que afirma ('Esta oración es falsa') sería cierto, lo que la haría falsa. Esto es una contradicción.",
         },
         {
-          texto: "$p \\wedge \\neg q$",
+          texto: "Sí, y es falsa.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Si fuera falsa, entonces lo que afirma ('Esta oración es falsa') sería falso, lo que significaría que la oración es en realidad verdadera. Esto es una contradicción.",
+        },
+        {
+          texto:
+            "No, porque es una paradoja y no se le puede asignar un valor de verdad consistente.",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. La proposición $p \\rightarrow q$ es equivalente a $\\neg p \\vee q$. Su negación es $\\neg(\\neg p \\vee q)$, que por las leyes de De Morgan se convierte en $p \\wedge \\neg q$.",
+            "Correcto. Esta es la paradoja del mentiroso. No se le puede asignar un valor de verdad (verdadero o falso) sin incurrir en una contradicción, por lo que no se considera una proposición lógica bien formada en la lógica proposicional.",
         },
         {
-          texto: "$\\neg q \\rightarrow \\neg p$",
+          texto: "Sí, porque es una oración declarativa.",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esta es la contrapositiva de $p \\rightarrow q$, que es lógicamente equivalente a la implicación original, no su negación.",
-        },
-        {
-          texto: "$q \\rightarrow p$",
-          esCorrecta: false,
-          retroalimentacion:
-            "Incorrecto. Esta es la recíproca (o conversa) de $p \\rightarrow q$, no su negación.",
+            "Incorrecto. Aunque tiene forma declarativa, su naturaleza autorreferencial y contradictoria impide que se le asigne un valor de verdad de manera consistente, que es un requisito para ser una proposición lógica.",
         },
       ],
     },
     {
       id: 2,
-      enunciado: "¿Cuál de las siguientes proposiciones es una tautología?",
+      enunciado:
+        'Sean $p$: "Llueve", $q$: "Hace frío" y $r$: "Llevo paraguas". ¿Cuál es la simbolización correcta de la frase: "Si llueve y hace frío, entonces llevo paraguas, pero si no llueve, no llevo paraguas"?',
       respuestas: [
         {
-          texto: "$p \\wedge \\neg p$",
-          esCorrecta: false,
-          retroalimentacion:
-            "Incorrecto. Esta proposición es una contradicción, ya que siempre es falsa independientemente del valor de verdad de $p$.",
-        },
-        {
-          texto: "$p \\vee \\neg p$",
+          texto:
+            "$( (p \\wedge q) \\rightarrow r ) \\wedge (\\neg p \\rightarrow \\neg r)$",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. Esta proposición es una tautología, conocida como el principio del tercero excluido. Siempre es verdadera, sin importar si $p$ es verdadero o falso.",
+            "Correcto. 'Si llueve y hace frío, entonces llevo paraguas' se traduce como $(p \\wedge q) \\rightarrow r$. 'Pero si no llueve, no llevo paraguas' se traduce como $(\\neg p \\rightarrow \\neg r)$. La palabra 'pero' actúa como una conjunción entre estas dos implicaciones.",
         },
         {
-          texto: "$p \\rightarrow (q \\wedge \\neg q)$",
+          texto:
+            "$(p \\wedge q \\rightarrow r) \\vee (\\neg p \\rightarrow \\neg r)$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. El consecuente $(q \\wedge \\neg q)$ es siempre falso. Si $p$ es verdadero, la implicación es falsa. Por lo tanto, no es una tautología.",
+            "Incorrecto. La palabra 'pero' generalmente indica una conjunción ($\\wedge$), no una disyunción ($\\vee$) entre las dos partes principales de la frase.",
         },
         {
-          texto: "$(p \\wedge q) \\rightarrow p$",
-          esCorrecta: true, // CORRECCIÓN: Esta también es una tautología. Dejaré una como ejemplo. Voy a cambiar la anterior correcta para que solo haya una.
-          // Para este ejemplo, mantendremos solo una correcta, ajustaré la anterior:
-          // retroalimentacion: "Correcto. Si $p \wedge q$ es verdadero, entonces $p$ debe ser verdadero. Si $p \wedge q$ es falso, la implicación es verdadera. Siempre es verdadera."
-          // Ajustando:
+          texto:
+            "$(p \\vee q) \\rightarrow r \\wedge \\neg p \\rightarrow \\neg r$",
+          esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Aunque esta es una tautología (si $p \wedge q$ es V, $p$ es V; si $p \wedge q$ es F, la implicación es V), la pregunta busca *cuál* de las opciones lo es. $p \\vee \\neg p$ es el ejemplo más canónico.",
-          // Cambiando esCorrecta para que solo haya una:
-          esCorrecta: false, // Para este ejercicio dejaremos solo una opción como la correcta principal
+            "Incorrecto. 'Llueve y hace frío' es una conjunción ($p \\wedge q$), no una disyunción ($p \\vee q$). Además, faltan paréntesis para agrupar correctamente las implicaciones y la conjunción principal.",
+        },
+        {
+          texto:
+            "$p \\wedge q \\rightarrow (r \\wedge (\\neg p \\rightarrow \\neg r))$",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. La estructura de la frase indica dos implicaciones separadas unidas por 'pero'. Esta opción anida incorrectamente la segunda implicación dentro del consecuente de la primera.",
         },
       ],
     },
     {
       id: 3,
       enunciado:
-        "Usando inducción matemática, demuestra que $1 + 3 + 5 + \\dots + (2n-1) = n^2$ para todo $n \\geq 1$. ¿Cuál es el paso base?",
+        "En lógica proposicional, ¿cuál es la equivalencia de $\\neg (p \\wedge q)$ según las Leyes de De Morgan?",
       respuestas: [
         {
-          texto: "Verificar que para $n=0$, $0 = 0^2$.",
+          texto: "$\\neg p \\wedge \\neg q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. La proposición es válida para $n \\geq 1$, por lo que $n=0$ no es un caso base válido. El caso base correcto es $n=1$, donde $1 = 1^2$.",
+            "Incorrecto. Por las leyes de De Morgan, la negación de una conjunción, $\\neg (p \\wedge q)$, es equivalente a la disyunción de las negaciones: $\\neg p \\vee \\neg q$.",
         },
         {
-          texto: "Verificar que para $n=1$, $1 = 1^2$.",
+          texto: "$\\neg p \\vee \\neg q$",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. En inducción matemática, el paso base consiste en verificar la proposición para el menor valor de $n$ para el cual se afirma la propiedad. Aquí, para $n=1$, la suma es $1$, y $1^2 = 1$, por lo que se cumple.",
+            "Correcto. Según las leyes de De Morgan, $\\neg (p \\wedge q)$ es lógicamente equivalente a $\\neg p \\vee \\neg q$.",
         },
         {
-          texto: "Verificar que para $n=2$, $1 + 3 = 2^2$.",
+          texto: "$p \\vee q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Aunque el caso $n=2$ es válido ($1 + 3 = 4 = 2^2$), el paso base debe ser el menor valor de $n$, que es $n=1$.",
+            "Incorrecto. La expresión $p \\vee q$ no es la negación de $p \\wedge q$. La negación correcta es $\\neg p \\vee \\neg q$.",
         },
         {
-          texto: "No se necesita un paso base.",
+          texto: "$\\neg (p \\vee q)$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. En una demostración por inducción matemática, siempre se requiere un paso base para establecer que la proposición es verdadera para el valor inicial, en este caso $n=1$.",
+            "Incorrecto. Esto sería $\\neg p \\wedge \\neg q$ por De Morgan, no la equivalencia de $\\neg (p \\wedge q)$.",
         },
       ],
     },
     {
       id: 4,
       enunciado:
-        "En una demostración por inducción matemática para probar $P(n)$ para todo $n \\geq n_0$, ¿qué establece la hipótesis inductiva?",
+        "¿En qué único caso la proposición condicional $p \\rightarrow q$ es falsa?",
       respuestas: [
         {
-          texto: "Se demuestra que $P(n_0)$ es verdadera.",
-          esCorrecta: false,
-          retroalimentacion:
-            "Incorrecto. Esto corresponde al paso base, no a la hipótesis inductiva.",
-        },
-        {
-          texto:
-            "Se asume que $P(k)$ es verdadera para algún entero $k \\geq n_0$.",
+          texto: "Cuando $p$ es verdadera y $q$ es falsa.",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. La hipótesis inductiva es la suposición de que la proposición $P(k)$ se cumple para un entero arbitrario $k$ (dentro del rango especificado), con el fin de demostrar que también se cumple para $P(k+1)$.",
+            "Correcto. La implicación $p \\rightarrow q$ (léase 'si $p$, entonces $q$') es falsa únicamente cuando el antecedente $p$ es verdadero y el consecuente $q$ es falso.",
         },
         {
-          texto:
-            "Se demuestra que si $P(k)$ es verdadera, entonces $P(k+1)$ es verdadera.",
+          texto: "Cuando $p$ es falsa y $q$ es verdadera.",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto describe el objetivo del paso inductivo completo. La hipótesis inductiva es solo la parte de asumir $P(k)$.",
+            "Incorrecto. Si el antecedente $p$ es falso, la implicación $p \\rightarrow q$ siempre es verdadera, independientemente del valor de $q$.",
         },
         {
-          texto: "Se demuestra que $P(k+1)$ es verdadera directamente.",
+          texto: "Cuando tanto $p$ como $q$ son falsas.",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Si se pudiera demostrar $P(k+1)$ directamente sin asumir $P(k)$, no se necesitaría la inducción. La inducción se basa en la conexión entre $P(k)$ y $P(k+1)$.",
+            "Incorrecto. Si $p$ es falsa y $q$ es falsa, la implicación $p \\rightarrow q$ es verdadera.",
+        },
+        {
+          texto: "Cuando tanto $p$ como $q$ son verdaderas.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Si $p$ es verdadera y $q$ es verdadera, la implicación $p \\rightarrow q$ es verdadera.",
         },
       ],
     },
     {
-      id: 5,
+      id: 13,
       enunciado:
-        "¿Cuál es la proposición lógicamente equivalente a $\\neg (p \\vee q)$ según las Leyes de De Morgan?",
+        "Si se sabe que $p \\vee q$ es verdadero y también se sabe que $\\neg p$ es verdadero, ¿qué se puede inferir usando la regla del Silogismo Disyuntivo?",
       respuestas: [
         {
-          texto: "$\\neg p \\vee \\neg q$",
+          texto: "$p$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto es equivalente a $\\neg (p \\wedge q)$. Recuerda que el operador lógico principal (disyunción/conjunción) también cambia.",
+            "Incorrecto. La premisa establece $\\neg p$, por lo que $p$ no puede ser la conclusión.",
         },
         {
-          texto: "$p \\wedge q$",
+          texto: "$\\neg q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto no es equivalente a la negación de una disyunción. Se deben negar los componentes y cambiar el operador.",
+            "Incorrecto. Si $p \\vee q$ es V y $\\neg p$ es V (lo que significa que $p$ es F), entonces $q$ debe ser V para que la disyunción sea V.",
         },
         {
-          texto: "$\\neg p \\wedge \\neg q$",
+          texto: "$q$",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. Una de las Leyes de De Morgan establece que la negación de una disyunción es la conjunción de las negaciones: $\\neg (p \\vee q) \\equiv \\neg p \\wedge \\neg q$.",
+            "Correcto. El Silogismo Disyuntivo establece que si tenemos una disyunción $p \\vee q$ que es verdadera, y una de las proposiciones es falsa (en este caso, $\\neg p$ implica que $p$ es falsa), entonces la otra proposición debe ser verdadera ($q$).",
         },
         {
-          texto: "$p \\rightarrow \\neg q$",
+          texto: "$p \\leftrightarrow q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto es una implicación y no es una forma general equivalente a $\\neg (p \\vee q)$ por De Morgan.",
+            "Incorrecto. No hay suficiente información para establecer una bicondicional entre $p$ y $q$.",
         },
       ],
     },
     {
       id: 6,
       enunciado:
-        "Al probar por inducción que $n^3 + 2n$ es divisible por 3 para todo $n \\geq 1$. Si asumimos como hipótesis inductiva que $k^3 + 2k = 3m$ para algún entero $m$, ¿qué se busca demostrar en el paso inductivo para $k+1$?",
+        "¿Cuál es la contrapositiva de la implicación $p \\rightarrow q$?",
       respuestas: [
         {
-          texto: "Que $(k+1)^3 + 2(k+1)$ es igual a $k^3 + 2k$.",
+          texto: "$q \\rightarrow p$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. No esperamos que la expresión para $k+1$ sea igual a la expresión para $k$. Buscamos demostrar que la *propiedad* (ser divisible por 3) se mantiene.",
+            "Incorrecto. Esto se llama la recíproca (o conversa) de la implicación, no la contrapositiva.",
         },
         {
-          texto: "Que $(k+1)^3 + 2(k+1)$ es divisible por 3.",
+          texto: "$\\neg p \\rightarrow \\neg q$",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Esto se llama la inversa de la implicación, no la contrapositiva.",
+        },
+        {
+          texto: "$\\neg q \\rightarrow \\neg p$",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. El objetivo del paso inductivo es mostrar que $P(k+1)$ es verdadera. En este caso, significa demostrar que la expresión $(k+1)^3 + 2(k+1)$ también es divisible por 3, utilizando la hipótesis de que $k^3 + 2k$ lo es.",
+            "Correcto. La contrapositiva de $p \\rightarrow q$ se forma negando ambas proposiciones y cambiando el orden, resultando en $\\neg q \\rightarrow \\neg p$. Es lógicamente equivalente a la implicación original.",
         },
         {
-          texto: "Que $k^3 + 2k$ es divisible por 3.",
+          texto: "$p \\wedge \\neg q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto es lo que se asume en la hipótesis inductiva ($P(k)$), no lo que se busca demostrar para $P(k+1)$.",
-        },
-        {
-          texto: "Que $(k+1)^3 + 2(k+1) = 3m + 3$.",
-          esCorrecta: false,
-          retroalimentacion:
-            "Incorrecto. Si bien llegar a una expresión como $3m + 3q$ (donde $q$ es entero) demostraría la divisibilidad, el objetivo fundamental es probar que 'es divisible por 3', no que sea igual a una forma específica que involucre la $m$ original.",
+            "Incorrecto. Esta es la negación de la implicación $p \\rightarrow q$.",
         },
       ],
     },
     {
       id: 7,
       enunciado:
-        "¿Cuál es la contrapositiva de la proposición 'Si llueve, entonces el suelo está mojado' ($p \\rightarrow q$)?",
+        "La regla de inferencia Modus Ponens establece que si tenemos las premisas $p \\rightarrow q$ y $p$, podemos concluir:",
       respuestas: [
         {
-          texto:
-            "Si no llueve, entonces el suelo no está mojado ($\\neg p \\rightarrow \\neg q$).",
+          texto: "$\\neg q$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esta es la inversa de la proposición original, no la contrapositiva.",
+            "Incorrecto. Concluir $\\neg q$ a partir de $p \\rightarrow q$ y $p$ sería una falacia.",
         },
         {
-          texto:
-            "Si el suelo está mojado, entonces llueve ($q \\rightarrow p$).",
-          esCorrecta: false,
-          retroalimentacion:
-            "Incorrecto. Esta es la recíproca (o conversa) de la proposición original, no la contrapositiva.",
-        },
-        {
-          texto:
-            "Si el suelo no está mojado, entonces no llueve ($\\neg q \\rightarrow \\neg p$).",
+          texto: "$q$",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. La contrapositiva de $p \\rightarrow q$ es $\\neg q \\rightarrow \\neg p$. Ambas proposiciones son lógicamente equivalentes.",
+            "Correcto. Modus Ponens (modo que afirmando afirma) permite concluir $q$ si se sabe que $p \\rightarrow q$ es verdadero y $p$ es verdadero.",
         },
         {
-          texto: "Llueve y el suelo no está mojado ($p \\wedge \\neg q$).",
+          texto: "$\\neg p$",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esta es la negación de la proposición original $p \\rightarrow q$, no su contrapositiva.",
+            "Incorrecto. No se puede concluir $\\neg p$ con estas premisas usando Modus Ponens.",
+        },
+        {
+          texto: "$p \\wedge q$",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Aunque $p$ y $q$ son verdaderos en este escenario, la conclusión directa del Modus Ponens es $q$.",
         },
       ],
     },
     {
       id: 8,
       enunciado:
-        "Para la demostración por inducción de que $\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$ para $n \\geq 1$. En el paso inductivo, después de asumir que $\\sum_{i=1}^{k} i = \\frac{k(k+1)}{2}$ (Hipótesis Inductiva), ¿cuál es el siguiente paso algebraico principal para demostrar $P(k+1)$?",
+        "Dado el argumento:\n1. Si estudio, aprobaré el examen ($p \\rightarrow q$).\n2. Estudié ($p$).\n¿Cuál es la conclusión válida según Modus Ponens?",
       respuestas: [
         {
-          texto: "Demostrar que $\\frac{(k+1)(k+2)}{2} = \\frac{k(k+1)}{2}$.",
+          texto: "No estudié ($\\neg p$)",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Esto implicaría que el término $(k+1)$ es cero, lo cual no es el objetivo. Se debe trabajar con la suma hasta $k+1$.",
+            "Incorrecto. La premisa 2 afirma que 'Estudié' ($p$). La conclusión no puede ser su negación.",
         },
         {
-          texto:
-            "Escribir $\\sum_{i=1}^{k+1} i$ como $(\\sum_{i=1}^{k} i) + (k+1)$ y sustituir la hipótesis inductiva.",
+          texto: "Aprobaré el examen ($q$)",
           esCorrecta: true,
           retroalimentacion:
-            "Correcto. Se separa el último término de la suma, se aplica la hipótesis inductiva al resto, y luego se manipula algebraicamente para llegar a la forma $\\frac{(k+1)((k+1)+1)}{2}$.",
+            "Correcto. Modus Ponens es una regla de inferencia válida que establece que si una implicación $p \\rightarrow q$ es verdadera y su antecedente $p$ es verdadero, entonces su consecuente $q$ debe ser verdadero.",
+        },
+        {
+          texto: "No aprobaré el examen ($\\neg q$)",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Esta conclusión no se sigue lógicamente de las premisas dadas mediante Modus Ponens. Para concluir $\\neg q$, necesitaríamos Modus Tollens y la premisa $\\neg q$.",
+        },
+        {
+          texto: "Si no apruebo, no estudié ($\\neg q \\rightarrow \\neg p$)",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Aunque $\\neg q \\rightarrow \\neg p$ es la contrapositiva de la premisa 1 y por lo tanto lógicamente equivalente a ella, no es la conclusión del argumento usando Modus Ponens con las premisas dadas.",
+        },
+      ],
+    },
+    {
+      id: 9,
+      enunciado:
+        "¿Cuándo es verdadera la proposición bicondicional $p \\leftrightarrow q$?",
+      respuestas: [
+        {
+          texto: "Cuando $p$ es verdadera y $q$ es falsa.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Si $p$ y $q$ tienen diferentes valores de verdad, la bicondicional $p \\leftrightarrow q$ es falsa.",
+        },
+        {
+          texto: "Únicamente cuando $p$ es verdadera.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Si $p$ es verdadera pero $q$ es falsa, $p \\leftrightarrow q$ es falsa. El valor de $q$ también es crucial.",
         },
         {
           texto:
-            "Verificar la fórmula para $k+1$ numéricamente, por ejemplo, con $k=2$, verificar para $n=3$.",
+            "Cuando $p$ y $q$ tienen el mismo valor de verdad (ambas V o ambas F).",
+          esCorrecta: true,
+          retroalimentacion:
+            "Correcto. La bicondicional $p \\leftrightarrow q$ (léase '$p$ si y solo si $q$') es verdadera si $p$ y $q$ son ambas verdaderas, o si $p$ y $q$ son ambas falsas.",
+        },
+        {
+          texto: "Únicamente cuando $q$ es verdadera.",
           esCorrecta: false,
           retroalimentacion:
-            "Incorrecto. Verificar con ejemplos numéricos puede dar confianza, pero no constituye una demostración algebraica para el paso inductivo general.",
+            "Incorrecto. Si $q$ es verdadera pero $p$ es falsa, $p \\leftrightarrow q$ es falsa. El valor de $p$ también es crucial.",
+        },
+      ],
+    },
+    {
+      id: 10,
+      enunciado:
+        "La proposición $(p \\rightarrow q) \\wedge (\\neg p \\rightarrow r)$ es un ejemplo de:",
+      respuestas: [
+        {
+          texto: "Una regla de inferencia simple como Modus Ponens.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Modus Ponens tiene una estructura diferente ($P \\rightarrow Q, P \\vdash Q$).",
+        },
+        {
+          texto: "Una tautología.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. No es necesariamente siempre verdadera. Por ejemplo, si $p=V, q=F, r=F$, entonces $(V \\rightarrow F) \\wedge (F \\rightarrow F)$ es $F \\wedge V$, que es $F$.",
+        },
+        {
+          texto: "Un dilema constructivo.",
+          esCorrecta: false,
+          retroalimentacion:
+            "Incorrecto. Un dilema constructivo tiene la forma $(P \\rightarrow Q) \\wedge (R \\rightarrow S) \\wedge (P \\vee R) \\vdash (Q \\vee S)$. Esta proposición es solo la parte de las implicaciones.",
         },
         {
           texto:
-            "Asumir que $\\sum_{i=1}^{k+1} i = \\frac{(k+1)(k+2)}{2}$ y trabajar hacia atrás.",
-          esCorrecta: false,
+            "Una proposición compuesta que podría ser la premisa de un argumento más complejo, como un dilema.",
+          esCorrecta: true,
           retroalimentacion:
-            "Incorrecto. En el paso inductivo, se debe partir de un lado (generalmente el lado izquierdo de $P(k+1)$ o una expresión relacionada) y, usando la hipótesis inductiva $P(k)$, llegar al otro lado. Asumir la conclusión es un error lógico.",
+            "Correcto. Esta estructura, si se combina con $p \\vee \\neg p$ (que es una tautología), puede llevar a la conclusión $q \\vee r$ a través de un dilema constructivo (aunque aquí $\\neg p$ se usa en lugar de una variable independiente $s$). Representa un caso donde se consideran dos escenarios basados en $p$ o su negación.",
         },
       ],
     },

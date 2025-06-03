@@ -39,6 +39,7 @@ const QuizComponent = ({ cuestionario }) => {
       alert('Por favor, selecciona una respuesta primero.');
       return;
     }
+
     setShowFeedbackGlobal((prev) => ({ ...prev, [qId]: true }));
     setShowSolution((prev) => ({ ...prev, [qId]: false }));
 
@@ -91,7 +92,6 @@ const QuizComponent = ({ cuestionario }) => {
   };
 
   const toggleIndividualFeedback = (qId, answerIndex) => {
-    // Ya no se previene ocultar el feedback de la correcta en modo solución
     setShowIndividualFeedback(prev => ({
       ...prev,
       [qId]: {
@@ -117,22 +117,21 @@ const QuizComponent = ({ cuestionario }) => {
     setCurrentQuestionIndex(index);
   };
 
-  // Estilos de botones mejorados con efectos
-  const baseButtonClass = "px-4 py-2 rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm sm:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5";
-  const primaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 focus:ring-blue-500`;
-  const secondaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 hover:from-gray-200 hover:to-gray-300 focus:ring-gray-400`;
-  const tertiaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600 focus:ring-yellow-400 px-3 py-1.5 text-xs sm:text-sm`;
-  const disabledButtonClass = "disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none disabled:hover:shadow-none disabled:hover:translate-y-0";
+  const baseButtonClass = "px-4 py-2 rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 backdrop-blur-md border border-white/20 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-white/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300";
+
+  const primaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-blue-500/80 to-blue-600/80 text-white hover:from-blue-600/90 hover:to-blue-700/90 focus:ring-blue-400/60 shadow-blue-500/25 hover:shadow-blue-600/40`;
+
+  const secondaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-gray-100/70 to-gray-200/70 text-gray-800 hover:from-gray-200/80 hover:to-gray-300/80 focus:ring-gray-400/60 shadow-gray-300/30 hover:shadow-gray-400/40 backdrop-blur-lg`;
+
+  const tertiaryButtonClass = `${baseButtonClass} bg-gradient-to-r from-emerald-500/80 to-emerald-600/50 text-white hover:from-emerald-500/90 hover:to-emerald-600/90 focus:ring-emerald-400/60 px-3 py-1.5 text-xs sm:text-sm shadow-emerald-500/25 hover:shadow-emerald-500/40`;
+
+  const disabledButtonClass = "disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-lg disabled:hover:shadow-lg disabled:hover:translate-y-0 disabled:before:opacity-0 disabled:backdrop-blur-sm";
 
   return (
-    <div className="max-w-4xl mx-auto p-6 sm:p-8 my-12 relative overflow-hidden">
-      {/* Fondo con efecto glass */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 opacity-70 z-0"></div>
-      <div className="absolute inset-0 backdrop-blur-sm bg-white/30 rounded-2xl shadow-xl border border-white/40 z-10"></div>
-      
+    <div className="max-w-4xl mx-auto p-6 sm:p-8 my-12 relative overflow-hidden pt-0 mt-0">
       {/* Contenido principal */}
-      <div className="relative z-20 p-2">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-800 mb-8">
+      <div className="relative z-20 p-2 mt-0 pt-0">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-emerald-700 mb-8">
           <MathJaxRenderer content={cuestionario.titulo} />
         </h2>
 
@@ -142,9 +141,9 @@ const QuizComponent = ({ cuestionario }) => {
             <button
               key={`dot-${index}`}
               className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out
-                          ${index === currentQuestionIndex 
-                              ? 'bg-gradient-to-r from-blue-500 to-indigo-600 scale-125 ring-2 ring-blue-200 ring-offset-2' 
-                              : 'bg-blue-200 hover:bg-blue-300 transform hover:scale-110'}`}
+                          ${index === currentQuestionIndex
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-800 scale-125 ring-2 ring-blue-300 ring-offset-2'
+                  : 'bg-blue-200 hover:bg-blue-300 transform hover:scale-110'}`}
               onClick={() => goToQuestion(index)}
               aria-label={`Ir a la pregunta ${index + 1}`}
             />
@@ -155,8 +154,8 @@ const QuizComponent = ({ cuestionario }) => {
         <div className="relative backdrop-blur-md bg-white/60 rounded-2xl p-6 sm:p-8 shadow-lg border border-white/50 mb-8 overflow-hidden">
           {/* Elementos decorativos */}
           <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-100/50 blur-2xl"></div>
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-indigo-100/50 blur-2xl"></div>
-          
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-blue-100/50 blur-2xl"></div>
+
           <h3 className="text-sm text-gray-500 text-right mb-3 font-medium">
             Pregunta {currentQuestionIndex + 1} de {cuestionario.preguntas.length}
           </h3>
@@ -198,7 +197,7 @@ const QuizComponent = ({ cuestionario }) => {
                   answerClasses += ' bg-white/80 backdrop-blur-sm border-gray-300 text-gray-700 hover:bg-blue-50/80 hover:border-blue-400 hover:-translate-y-0.5';
                 }
               } else if (isSelectedNow) {
-                answerClasses += ' bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-500 ring-blue-500 font-semibold text-blue-800 hover:-translate-y-0.5';
+                answerClasses += ' bg-gradient-to-r from-blue-50 to-gray-50 border-blue-500 ring-blue-500 font-semibold text-blue-800 hover:-translate-y-0.5';
               } else {
                 if (isAttemptedIncorrect) {
                   answerClasses += ' bg-red-50/70 border-red-300 text-red-600 opacity-70 cursor-not-allowed';
@@ -223,9 +222,9 @@ const QuizComponent = ({ cuestionario }) => {
                       <button
                         onClick={() => toggleIndividualFeedback(questionId, index)}
                         className={`text-xs font-medium mt-2 ml-3 self-start transition-colors duration-150 py-1 px-2 rounded-md
-                                   ${respuesta.esCorrecta 
-                                       ? 'text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100' 
-                                       : 'text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100'}`}
+                                   ${respuesta.esCorrecta
+                            ? 'text-green-800 hover:text-green-800 bg-green-50 hover:bg-green-300'
+                            : 'text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100'}`}
                         aria-label={shouldShowThisIndividualFeedback ? 'Ocultar retroalimentación' : 'Ver retroalimentación'}
                       >
                         {shouldShowThisIndividualFeedback ? 'Ocultar retroalimentación' : 'Ver retroalimentación'}
@@ -240,13 +239,14 @@ const QuizComponent = ({ cuestionario }) => {
                       <div
                         className={`mt-2 p-4 rounded-xl text-sm shadow-inner backdrop-blur-sm transition-all duration-300 animate-fadeIn
                                   ${respuesta.esCorrecta
-                            ? 'bg-green-50/80 border-l-4 border-green-500 text-green-700'
+                            ? 'bg-green-50/80 border-l-4 border-green-700 text-green-700'
                             : 'bg-red-50/80 border-l-4 border-red-500 text-red-700'
                           }`}
                       >
                         <MathJaxRenderer content={respuesta.retroalimentacion} />
                       </div>
-                    )}
+                    )
+                  }
                 </div>
               );
             })}
@@ -301,7 +301,7 @@ const QuizComponent = ({ cuestionario }) => {
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
