@@ -80,8 +80,8 @@ const App = () => {
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-green-600 ">
             Ejercicios Explicados
           </h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Explora ejercicios detallados de lógica proposicional e inducción matemática para fortalecer tu comprensión y habilidades. Además, puedes acceder a dos cuestionarios para repasar ambos temas.
+          <p className="text-lg text-gray-800 dark:text-gray-300 max-w-2xl mx-auto">
+            Elige un ejercicio de Lógica Proposicional o Inducción Matemática. Cuando hagas clic en su botón, se mostrará la página con el problema y, justo debajo, toda la solución explicada. Además, puedes hacer clic en cualquiera de los dos cuestionarios para repasar los conceptos de estos dos temas.
           </p>
         </header>
 

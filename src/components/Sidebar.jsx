@@ -110,7 +110,7 @@ export default function Sidebar({ data, isQuestionnaire = false }) {
           </div>
 
           <nav className="flex-1 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-500/50 scrollbar-track-transparent hover:scrollbar-thumb-emerald-600/70 scrollbar-thumb-rounded-full">
-            <Link to="/" className={navItemClasses}>
+            <Link to="/inicio" className={navItemClasses}>
               Página principal
             </Link>
 

@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as InicioImport } from './routes/inicio'
 import { Route as IndexImport } from './routes/index'
 import { Route as CuestionariosPruebaImport } from './routes/cuestionarios/prueba'
 import { Route as CuestionariosLogicaImport } from './routes/cuestionarios/logica'
@@ -19,6 +20,12 @@ import { Route as EjerciciosLogicaProposicionalIdImport } from './routes/ejercic
 import { Route as EjerciciosInduccionMatematicaIdImport } from './routes/ejercicios/induccion-matematica/$id'
 
 // Create/Update Routes
+
+const InicioRoute = InicioImport.update({
+  id: '/inicio',
+  path: '/inicio',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -70,6 +77,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/inicio': {
+      id: '/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof InicioImport
+      parentRoute: typeof rootRoute
+    }
     '/cuestionarios/induccion-matematica': {
       id: '/cuestionarios/induccion-matematica'
       path: '/cuestionarios/induccion-matematica'
@@ -112,6 +126,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inicio': typeof InicioRoute
   '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
   '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
@@ -121,6 +136,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inicio': typeof InicioRoute
   '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
   '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
@@ -131,6 +147,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/inicio': typeof InicioRoute
   '/cuestionarios/induccion-matematica': typeof CuestionariosInduccionMatematicaRoute
   '/cuestionarios/logica': typeof CuestionariosLogicaRoute
   '/cuestionarios/prueba': typeof CuestionariosPruebaRoute
@@ -142,6 +159,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/inicio'
     | '/cuestionarios/induccion-matematica'
     | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
@@ -150,6 +168,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/inicio'
     | '/cuestionarios/induccion-matematica'
     | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
@@ -158,6 +177,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/inicio'
     | '/cuestionarios/induccion-matematica'
     | '/cuestionarios/logica'
     | '/cuestionarios/prueba'
@@ -168,6 +188,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InicioRoute: typeof InicioRoute
   CuestionariosInduccionMatematicaRoute: typeof CuestionariosInduccionMatematicaRoute
   CuestionariosLogicaRoute: typeof CuestionariosLogicaRoute
   CuestionariosPruebaRoute: typeof CuestionariosPruebaRoute
@@ -177,6 +198,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InicioRoute: InicioRoute,
   CuestionariosInduccionMatematicaRoute: CuestionariosInduccionMatematicaRoute,
   CuestionariosLogicaRoute: CuestionariosLogicaRoute,
   CuestionariosPruebaRoute: CuestionariosPruebaRoute,
@@ -195,6 +217,7 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
+        "/inicio",
         "/cuestionarios/induccion-matematica",
         "/cuestionarios/logica",
         "/cuestionarios/prueba",
@@ -204,6 +227,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.jsx"
+    },
+    "/inicio": {
+      "filePath": "inicio.jsx"
     },
     "/cuestionarios/induccion-matematica": {
       "filePath": "cuestionarios/induccion-matematica.jsx"
